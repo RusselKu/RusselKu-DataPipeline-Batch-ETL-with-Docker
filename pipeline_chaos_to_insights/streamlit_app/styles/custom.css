@@ -1,0 +1,88 @@
+/* Import Montserrat from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+/* Main container */
+div[data-testid="stAppViewContainer"] {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1f0036, #4a148c, #ff6e40);
+    color: white;
+    padding: 2rem; 
+    border-radius: 15px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Headers h1, h2, h3 */
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 1rem;
+}
+
+/* Sidebar with gradient */
+div[data-testid="stSidebar"] > div:first-child {
+    background: linear-gradient(to bottom, #4a148c, #1f0036);
+}
+
+/* Entry animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+div[data-testid="stAppViewContainer"] > div:first-child {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Centered tables (dataframes) with max size */
+div[data-testid="stDataFrameContainer"],
+[data-testid="stDataFrame"] {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 25px;          /* More readable */
+    margin: 1.5rem auto 2rem auto; /* Horizontal centering with top/bottom margins */
+    max-width: 1500px;         /* Limit max width to avoid stretching too much */
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* Inner table background (content) */
+.css-1siy2j7 .st-emotion-cache-1gulkj5 {
+    background-color: rgba(255, 255, 255, 0.03);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+}
+
+/* Smooth hover effect for tables */
+div[data-testid="stDataFrameContainer"]:hover,
+[data-testid="stDataFrame"]:hover {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Style for inputs and widgets */
+div[data-testid="stTextInput"] > div, 
+div[data-testid="stNumberInput"] > div,
+div[data-testid="stSelectbox"] > div {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 5px 10px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Widget label colors */
+div[data-testid^="stTextInput"] label,
+div[data-testid^="stSelectbox"] label {
+    color: white !important;
+}
+
+/* Margin between sections to avoid crowding */
+section[data-testid="stVerticalBlock"] {
+    margin-bottom: 2rem;
+}
