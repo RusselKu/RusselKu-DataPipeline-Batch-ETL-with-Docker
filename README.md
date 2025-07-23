@@ -1,10 +1,10 @@
-````markdown
+
 # 🧠 PIPELINE_CHAOS_TO_INSIGHTS
 
 A full-stack data pipeline project that extracts, transforms, and visualizes financial data from multiple APIs (e.g., exchange rates, gold prices), using **Airflow**, **MongoDB**, and **Streamlit** — all containerized with **Docker**.
 
 ---
-
+````markdown
 ## 📁 Project Structure
 
 ```bash
@@ -142,16 +142,6 @@ show collections
 | `main_pipeline.py`             | Master DAG that runs all the above in sequence |
 
 ---
-
-## 📌 Requirements
-
-Make sure Docker + Docker Compose is installed.
-
-If you want to install Python dependencies locally:
-
-```bash
-pip install -r requirements.txt
-```
 
 ## 🤝 Credits
 
