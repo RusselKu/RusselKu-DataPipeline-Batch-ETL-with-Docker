@@ -3,7 +3,6 @@
 
 A full-stack data pipeline project that extracts, transforms, and visualizes financial data from multiple APIs (e.g., exchange rates, gold prices), using **Airflow**, **MongoDB**, and **Streamlit** — all containerized with **Docker**.
 ````markdown
----
 
 ## 📁 Project Structure
 
@@ -17,7 +16,7 @@ PIPELINE_CHAOS_TO_INSIGHTS/
 │   └── utils/
 │       ├── api_helpers.py                   # API request handler
 │       ├── mongo_utils.py                   # MongoDB helpers
-│       └── transform_helpers.py             # Transformation logic (if needed)
+│       └── transform_helpers.py             # Transformation logic
 │
 ├── streamlit_app/
 │   ├── app.py                               # Main dashboard entry
