@@ -42,12 +42,51 @@ PIPELINE_CHAOS_TO_INSIGHTS/
 
 ## 🚀 How to Run the Project
 
-### 1. ✅ Clone and Start the Containers
+### 1. ✅ Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/PIPELINE_CHAOS_TO_INSIGHTS.git
-cd PIPELINE_CHAOS_TO_INSIGHTS
+git clone https://github.com/RusselKu/RusselKu-DataPipeline-Batch-ETL-with-Docker.git
+cd RusselKu-DataPipeline-Batch-ETL-with-Docker/pipeline_chaos_to_insights/
+```
+
+### 2. 👤 Create Airflow Admin User
+
+#### MacOS/Linux:
+
+```bash
+docker compose run --rm webserver airflow users create \
+    --username airflow \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com \
+    --password airflow
+```
+
+#### Windows (PowerShell):
+
+```bash
+docker-compose run --rm webserver airflow users create `
+    --username airflow `
+    --firstname Admin `
+    --lastname User `
+    --role Admin `
+    --email admin@example.com `
+    --password airflow
+```
+
+### 3. 🧱 Build and Run the Services
+
+```bash
 docker-compose up --build
+```
+
+### 4. 🧭 Connect to MongoDB with Compass
+
+In **MongoDB Compass**, create a new connection using the following URI:
+
+```text
+mongodb://root:example@localhost:27019/admin
 ```
 
 ---
@@ -69,7 +108,7 @@ docker-compose up --build
 
 ## 📂 MongoDB Collections
 
-Database: `project_db`
+**Database:** `project_db`
 
 | Collection                                 | Description                              |
 | ------------------------------------------ | ---------------------------------------- |
@@ -124,7 +163,9 @@ pip install -r requirements.txt
 
 ## 📸 Screenshots
 
-> Include screenshots here of the dashboard (Streamlit) or Airflow UI with DAGs running.
+![alt text](image.png)> Airflow 
+
+![alt text](image-1.png)>Streamlit
 
 ---
 
