@@ -80,7 +80,7 @@ docker-compose up --build
 In **MongoDB Compass**, create a new connection using the following URI:
 
 ```text
-mongodb://root:example@localhost:27019/admin
+mongodb://root:example@localhost:27017/admin
 ```
 
 ---
