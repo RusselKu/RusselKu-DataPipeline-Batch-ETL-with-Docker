@@ -152,5 +152,3 @@ Developed by **Russel Ku** and enhanced with a custom multi-service pipeline for
 ## 🧠 License
 
 MIT License — feel free to use, fork, and contribute!
-
-```
