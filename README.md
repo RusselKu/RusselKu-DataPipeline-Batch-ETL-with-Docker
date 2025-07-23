@@ -17,7 +17,7 @@ PIPELINE_CHAOS_TO_INSIGHTS/
 │   └── utils/
 │       ├── api_helpers.py                   # API request handler
 │       ├── mongo_utils.py                   # MongoDB helpers
-│       └── transform_helpers.py             # Transformation logic (if needed)
+│       └── transform_helpers.py             # Transformation logic 
 │
 ├── streamlit_app/
 │   ├── app.py                               # Main dashboard entry
