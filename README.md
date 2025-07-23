@@ -159,16 +159,6 @@ If you want to install Python dependencies locally:
 pip install -r requirements.txt
 ```
 
----
-
-## 📸 Screenshots
-
-![alt text](image.png)> Airflow 
-
-![alt text](image-1.png)>Streamlit
-
----
-
 ## 🤝 Credits
 
 Developed by **Russel Ku** and enhanced with a custom multi-service pipeline for data visualization and orchestration.
