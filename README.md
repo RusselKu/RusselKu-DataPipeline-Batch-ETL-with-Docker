@@ -1,131 +1,182 @@
 ````markdown
-# 🚀 ETL Pipeline: Airflow + MongoDB + Streamlit
+# 🧠 PIPELINE_CHAOS_TO_INSIGHTS
 
-A fully dockerized batch ETL pipeline that:
-- ⬇️ **Ingests** data from multiple public APIs via Apache Airflow
-- 🗃️ **Stores** both raw and processed data in MongoDB
-- 📊 **Visualizes** results using interactive Streamlit dashboards
-
-## 📌 Project Overview
-
-This project demonstrates a modular, scalable data pipeline architecture using Airflow for orchestration, MongoDB for data persistence, and Streamlit for visualization. It is ideal for educational and production-ready use cases where asynchronous data ingestion and fast dashboarding are required.
+A full-stack data pipeline project that extracts, transforms, and visualizes financial data from multiple APIs (e.g., exchange rates, gold prices), using **Airflow**, **MongoDB**, and **Streamlit** — all containerized with **Docker**.
 
 ---
 
-## 🌐 APIs Used
+## 📁 Project Structure
 
-- 💱 **Exchange Rate API (Fawaz Ahmed)**  
-
-  Provides exchange rates for hundreds of currencies in JSON format.
-
-- 🪙 **Gold Price API (Metals API clone)**  
-  ↪ Simulated API for retrieving historical gold prices.
+```bash
+PIPELINE_CHAOS_TO_INSIGHTS/
+├── dags/
+│   ├── exchange_rate_ingestion.py           # ETL for currency exchange rates
+│   ├── currency_names_processing.py         # Normalize currency names
+│   ├── gold_price_ingestion.py              # ETL for gold prices
+│   ├── main_pipeline.py                     # Master DAG orchestration
+│   └── utils/
+│       ├── api_helpers.py                   # API request handler
+│       ├── mongo_utils.py                   # MongoDB helpers
+│       └── transform_helpers.py             # Transformation logic (if needed)
+│
+├── streamlit_app/
+│   ├── app.py                               # Main dashboard entry
+│   ├── Dockerfile                           # Streamlit container config
+│   ├── styles/
+│   │   └── custom.css                       # Global CSS styling
+│   ├── pages/
+│   │   ├── exchange_rates.py               # Visualizes top 10 exchange rates
+│   │   ├── currency_names.py               # Currency names + rate mapping
+│   │   └── gold_prices.py                  # Gold price visualization
+│   └── utils/
+│       ├── db.py                           # MongoDB connection for Streamlit
+│       └── charts.py                       # Reusable Plotly chart components
+│
+├── docker-compose.yml                       # Docker orchestration
+├── requirements.txt                         # Python dependencies
+├── .env                                     # Optional env variables
+└── README.md                                # You are here 📄
+````
 
 ---
 
-## 🆚 Why MongoDB over PostgreSQL?
+## 🚀 How to Run the Project
 
-MongoDB was chosen for its schema flexibility and native support for nested JSON documents — making it ideal for storing hierarchical data from external APIs without the need for schema migrations. It also allows rapid prototyping and dynamic visualizations in Streamlit.
+### 1. ✅ Clone the Repository
 
----
+```bash
+git clone https://github.com/RusselKu/RusselKu-DataPipeline-Batch-ETL-with-Docker.git
+cd RusselKu-DataPipeline-Batch-ETL-with-Docker/pipeline_chaos_to_insights/
+```
 
-## 🐳 How to Launch Services
+### 2. 👤 Create Airflow Admin User
 
-From the project root:
+#### MacOS/Linux:
+
+```bash
+docker compose run --rm webserver airflow users create \
+    --username airflow \
+    --firstname Admin \
+    --lastname User \
+    --role Admin \
+    --email admin@example.com \
+    --password airflow
+```
+
+#### Windows (PowerShell):
+
+```bash
+docker-compose run --rm webserver airflow users create `
+    --username airflow `
+    --firstname Admin `
+    --lastname User `
+    --role Admin `
+    --email admin@example.com `
+    --password airflow
+```
+
+### 3. 🧱 Build and Run the Services
 
 ```bash
 docker-compose up --build
-````
+```
 
-This will launch the following services:
+### 4. 🧭 Connect to MongoDB with Compass
 
-| Service       | URL                                            |
-| ------------- | ---------------------------------------------- |
-| Airflow UI    | [http://localhost:8080](http://localhost:8080) |
-| Streamlit App | [http://localhost:8501](http://localhost:8501) |
-| MongoDB       | localhost:27017 (internal)                     |
+In **MongoDB Compass**, create a new connection using the following URI:
 
----
-
-## 📅 How to Trigger DAGs
-
-1. Open the Airflow UI at:
-   → [http://localhost:8080](http://localhost:8080)
-
-2. Use the toggle switch to **enable DAGs** like:
-
-   * `CurrenlyExchangeRates_ingestion`
-   * `Gold_Exchangeingestion`
-   * `main_pipeline`
-
-3. Click the ▶️ **Trigger DAG** button.
-
-4. Navigate to the "Graph View" or "Tree View" to check execution flow.
-
----
-
-## 🪵 How to View Airflow Logs
-
-* In the Airflow UI, select a DAG run.
-* Click on any task (e.g., `extract_exchange_rates`).
-* Then click **"View Log"** to inspect output, errors, or XComs.
-
----
-
-## 📈 Open the Streamlit Dashboard
-
-Once services are running:
-
-→ Visit [http://localhost:8501](http://localhost:8501)
-
-You’ll see multiple dashboards for:
-
-* 📉 **Exchange Rate Trends**
-* 🪙 **Gold Price Visualizations**
-* 🌍 **Currency Metadata**
-
-Each dashboard allows interactive filtering and plot generation in real-time.
-
----
-
-## 🔄 How XCom is Used
-
-Apache Airflow’s **XCom** (cross-communication) mechanism is used to:
-
-* Pass processed exchange rate results between tasks.
-* Share MongoDB insertion results across tasks for logging and conditional logic.
-* Track DAG execution metadata that can be surfaced in dashboards.
-
----
-
-## 📂 Folder Structure
-
-```bash
-pipeline_chaos_to_insights/
-├── dags/                       # All Airflow DAG definitions
-├── utils/                      # Shared ETL helpers (Mongo, APIs, transforms)
-├── streamlit_app/             # Dashboards, pages, styling
-│   ├── pages/
-│   ├── utils/
-│   ├── styles/
-│   └── app.py
-├── Documentation-Initialization/
-│   └── README.md               # DAG-level doc with images (if needed)
-├── docker-compose.yml         # Defines all services
-├── Dockerfile                 # Airflow base Docker image
-└── .env                       # Your local secrets (excluded by .gitignore)
+```text
+mongodb://root:example@localhost:27019/admin
 ```
 
 ---
 
-## ✅ To-Do / Coming Soon
+## 🌐 Service Access (Default Ports)
 
-* [ ] Add unit tests for pipeline components
-* [ ] Include screenshots of dashboards
-* [ ] Add support for PostgreSQL as optional DB backend
-* [ ] CI/CD with GitHub Actions
+| Service       | URL                                            | Notes                 |
+| ------------- | ---------------------------------------------- | --------------------- |
+| **Airflow**   | [http://localhost:8080](http://localhost:8080) | DAG management UI     |
+| **Streamlit** | [http://localhost:8501](http://localhost:8501) | Frontend dashboard    |
+| **MongoDB**   | mongodb://localhost:27017                      | Used as main database |
+
+### Airflow Credentials:
+
+* **Username:** `airflow`
+* **Password:** `airflow`
 
 ---
 
-Built with ❤️ by [Russel Ku](https://github.com/RusselKu)
+## 📂 MongoDB Collections
 
+**Database:** `project_db`
+
+| Collection                                 | Description                              |
+| ------------------------------------------ | ---------------------------------------- |
+| `raw_exchange_rates_api`                   | Raw API data from er-api                 |
+| `processed_exchange_rates_api`             | Cleaned latest rates (one document only) |
+| `processed_processed_exchange_rates_names` | Currency names (code → full name)        |
+| `raw_gold_prices`                          | Raw gold price records                   |
+| `processed_gold_prices`                    | Cleaned gold price data                  |
+
+You can connect using:
+
+```bash
+docker exec -it pipeline_chaos_to_insights-mongodb-1 mongosh -u root -p example --authenticationDatabase admin
+use project_db
+show collections
+```
+
+---
+
+## 📊 Streamlit Pages Overview
+
+| Page               | Features                                                             |
+| ------------------ | -------------------------------------------------------------------- |
+| **Exchange Rates** | Top 10 currencies by value, styled table, bar/line/pie charts        |
+| **Currency Names** | Full name per currency code + current rate matching                  |
+| **Gold Prices**    | Historical and latest gold price trends (optional or in development) |
+
+---
+
+## 🧪 Airflow DAGs Overview
+
+| DAG File                       | Task Description                               |
+| ------------------------------ | ---------------------------------------------- |
+| `exchange_rate_ingestion.py`   | Extract + transform exchange rates from ER-API |
+| `currency_names_processing.py` | Fetch and map currency codes to full names     |
+| `gold_price_ingestion.py`      | Extract gold price data                        |
+| `main_pipeline.py`             | Master DAG that runs all the above in sequence |
+
+---
+
+## 📌 Requirements
+
+Make sure Docker + Docker Compose is installed.
+
+If you want to install Python dependencies locally:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 📸 Screenshots
+
+![alt text](image.png)> Airflow 
+
+![alt text](image-1.png)>Streamlit
+
+---
+
+## 🤝 Credits
+
+Developed by **Russel Ku** and enhanced with a custom multi-service pipeline for data visualization and orchestration.
+
+---
+
+## 🧠 License
+
+MIT License — feel free to use, fork, and contribute!
+
+```
