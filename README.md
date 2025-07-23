@@ -63,16 +63,10 @@ docker compose run --rm webserver airflow users create \
     --password airflow
 ```
 
-#### Windows (PowerShell):
+#### Db Init
 
 ```bash
-docker-compose run --rm webserver airflow users create `
-    --username airflow `
-    --firstname Admin `
-    --lastname User `
-    --role Admin `
-    --email admin@example.com `
-    --password airflow
+docker-compose run --rm webserver airflow db init
 ```
 
 ### 3. 🧱 Build and Run the Services
